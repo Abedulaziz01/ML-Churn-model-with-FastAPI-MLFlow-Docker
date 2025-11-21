@@ -44,7 +44,7 @@ def build_features(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame:
     
     This is the main feature engineering function that transforms raw customer data
     into ML-ready features. The transformations must be exactly replicated in the
-    serving pipeline to ensure prediction accuracy.
+    serving pipeline to ensure prediction accuracy... 
 
     """
     df = df.copy()
@@ -104,4 +104,10 @@ def build_features(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame:
 
     print(f"✅ Feature engineering complete: {df.shape[1]} final features")
     return df
+
+
+
+
+
+
 
