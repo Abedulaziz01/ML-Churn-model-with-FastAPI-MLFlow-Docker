@@ -29,6 +29,10 @@ def preprocess_data(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame
     # SeniorCitizen should be 0/1 ints if present
     if "SeniorCitizen" in df.columns:
         df["SeniorCitizen"] = df["SeniorCitizen"].fillna(0).astype(int)
+          # SeniorCitizen should be 0/1 ints if present
+    if "SeniorCitizen" in df.columns:
+        df["SeniorCitizen"] = df["SeniorCitizen"].fillna(0).astype(int)
+
 
     # simple NA strategy:
     # - numeric: fill with 0
