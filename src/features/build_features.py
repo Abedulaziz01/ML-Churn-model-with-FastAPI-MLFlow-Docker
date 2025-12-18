@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
@@ -33,6 +34,42 @@ def _map_binary_series(s: pd.Series) -> pd.Series:
     return s
 
 
+def _add_derived_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add derived features based on domain knowledge for churn prediction.
+    """
+    df = df.copy()
+    
+    # Tenure-based features
+    if 'tenure' in df.columns:
+        # Tenure groups (binning)
+        df['tenure_group'] = pd.cut(df['tenure'], bins=[0, 12, 24, 48, 72, np.inf], 
+                                    labels=['0-12', '13-24', '25-48', '49-72', '73+'])
+        # Convert to categorical for encoding
+        df['tenure_group'] = df['tenure_group'].astype(str)
+    
+    # Charge-based features
+    if 'MonthlyCharges' in df.columns and 'TotalCharges' in df.columns:
+        # Average monthly charges (total / tenure, avoid division by zero)
+        df['avg_monthly_charges'] = df['TotalCharges'] / (df['tenure'] + 1)
+        
+        # Charge ratio (monthly to total)
+        df['monthly_to_total_ratio'] = df['MonthlyCharges'] / (df['TotalCharges'] + 1)
+        
+        # Charge increase indicator (if tenure > 0, monthly > avg)
+        df['charge_increase'] = (df['MonthlyCharges'] > df['avg_monthly_charges']).astype(int)
+    
+    # Service-based features (assuming common telecom columns)
+    service_cols = ['PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity', 
+                    'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies']
+    existing_services = [col for col in service_cols if col in df.columns]
+    if existing_services:
+        # Total services count
+        df['total_services'] = df[existing_services].apply(lambda row: sum(1 for val in row if val == 'Yes'), axis=1)
+    
+    return df
+
+
 def build_features(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame:
     """
     Apply complete feature engineering pipeline for training data using sklearn transformers.
@@ -42,6 +79,10 @@ def build_features(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame:
     """
     df = df.copy()
     print(f"🔧 Starting feature engineering on {df.shape[1]} columns...")
+    
+    # === STEP 1: Add Derived Features ===
+    df = _add_derived_features(df)
+    print(f"   ➕ Added derived features. New shape: {df.shape}")
     
     # Identify feature types
     obj_cols = [c for c in df.select_dtypes(include=["object"]).columns if c != target_col]
