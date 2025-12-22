@@ -26,3 +26,5 @@ def load_data(file_path: str, test_size: float = 0.2, random_state: int = 42):
                                                        random_state=random_state)
     
     return X_train, X_test, y_train, y_test
+def preprocess_data(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame:
+    """ 
