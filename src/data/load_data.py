@@ -93,3 +93,9 @@ def encode_data(df: pd.DataFrame, target_col: str = "Churn",
     df = datetime_encoder.fit_transform(df[datetime_cols])
 
     return df
+def create_features(df: pd.DataFrame, target_col: str = "Churn", 
+                    categorical_cols: list = ["Gender", "SeniorCitizen", "Partner", "Dependents"], 
+                    numeric_cols: list = ["TotalCharges", "Age", "Seniority", "Education", "HoursPerWeek"], 
+                    ordinal_cols: list = ["MonthlyCharges"], 
+                    datetime_cols: list = ["LastCommunication", "LastContact", "LastAccountUpdate", "LastActivity"]) -> pd.DataFrame:
+    """
