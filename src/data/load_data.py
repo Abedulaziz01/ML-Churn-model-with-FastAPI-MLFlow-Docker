@@ -115,3 +115,11 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
     new_features["SeniorityInYears"] = new_features["Seniority"] / 10
     
     # calculate seniority in months
+    new_features["SeniorityInMonths"] = new_features["Seniority"] / 12
+    
+    # calculate seniority in days
+    new_features["SeniorityInDays"] = new_features["Seniority"] / 365
+    
+    # calculate seniority in weeks
+    new_features["SeniorityInWeeks"] = new_features["Seniority"] / 52    
+    return new_features     
