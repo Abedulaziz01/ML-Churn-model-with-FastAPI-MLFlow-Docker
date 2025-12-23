@@ -65,3 +65,31 @@ def preprocess_data(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame
     # - boolean: fill with False
     # - ordinal: fill with mode
     # - datetime: fill with median 
+    # - text: fill with mode
+def encode_data(df: pd.DataFrame, target_col: str = "Churn", 
+                categorical_cols: list = ["Gender", "SeniorCitizen", "Partner", "Dependents"], 
+                numeric_cols: list = ["TotalCharges", "Age", "Seniority", "Education", "HoursPerWeek"], 
+                ordinal_cols: list = ["MonthlyCharges"], 
+                datetime_cols: list = ["LastCommunication", "LastContact", "LastAccountUpdate", "LastActivity"]) -> pd.DataFrame:
+    """
+    Encode categorical and numeric data.
+    
+    This function performs the following tasks:
+    - Encode categorical data using one-hot encoding
+    - Encode numeric data using ordinal encoding
+    - Encode datetime data using ordinal encoding
+    - Return the encoded data
+    """
+    # one-hot encode categorical data
+    onehot_encoder = OneHotEncoder(handle_unknown="ignore")
+    df = onehot_encoder.fit_transform(df[categorical_cols])
+
+    # ordinal encode numeric data
+    ordinal_encoder = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
+    df = ordinal_encoder.fit_transform(df[numeric_cols])
+
+    # ordinal encode datetime data
+    datetime_encoder = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
+    df = datetime_encoder.fit_transform(df[datetime_cols])
+
+    return df
