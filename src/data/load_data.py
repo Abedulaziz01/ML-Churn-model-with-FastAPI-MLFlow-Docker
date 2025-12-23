@@ -59,3 +59,9 @@ def preprocess_data(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame
             df["SeniorCitizen"] = df["SeniorCitizen"].fillna(df["SeniorCitizen"].median()).astype(int)    
     
     return df
+    # simple NA strategy:
+    # - numeric: fill with 0    
+    # - categorical: fill with mode
+    # - boolean: fill with False
+    # - ordinal: fill with mode
+    # - datetime: fill with median 
