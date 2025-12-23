@@ -55,3 +55,4 @@ def preprocess_data(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame
         if "SeniorCitizen" in df.columns:
             df["SeniorCitizen"] = df["SeniorCitizen"].fillna(0).astype(int)
         # Fill NA with median
+        else:
