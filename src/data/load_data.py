@@ -98,4 +98,11 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
                     numeric_cols: list = ["TotalCharges", "Age", "Seniority", "Education", "HoursPerWeek"], 
                     ordinal_cols: list = ["MonthlyCharges"], 
                     datetime_cols: list = ["LastCommunication", "LastContact", "LastAccountUpdate", "LastActivity"]) -> pd.DataFrame:
+    """ 
+    Create new features from existing features.
+    
+    This function performs the following tasks:
+    - Create new features from existing features
+    - Return the new features
     """
+    # create new features
