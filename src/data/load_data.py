@@ -149,3 +149,6 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
     new_features = df.copy()        
     # calculate age in months
     new_features["AgeInMonths"] = new_features["Age"] / 12
+    
+    # calculate seniority in years
+    new_features["SeniorityInYears"] = new_features["Seniority"] / 10
