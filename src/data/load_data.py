@@ -144,4 +144,6 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
     This function performs the following tasks:
     - Create new features from existing features
     - Return the new features
-    """
+    """     
+    # create new features        
+    new_features = df.copy()
