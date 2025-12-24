@@ -146,4 +146,6 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
     - Return the new features
     """     
     # create new features        
-    new_features = df.copy()
+    new_features = df.copy()        
+    # calculate age in months
+    new_features["AgeInMonths"] = new_features["Age"] / 12
