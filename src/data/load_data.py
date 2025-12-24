@@ -129,5 +129,5 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
     # calculate hours per week in weeks
     new_features["HoursPerWeekInWeeks"] = new_features["HoursPerWeek"] / 52
     
-    # calculate hours per week in months
+    # calculate hours per week in months    
     new_features["HoursPerWeekInMonths"] = new_features["HoursPerWeek"] / 4.33
