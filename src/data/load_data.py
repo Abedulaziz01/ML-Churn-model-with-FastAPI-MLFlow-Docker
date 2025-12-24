@@ -132,3 +132,16 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
     # calculate hours per week in months    
     new_features["HoursPerWeekInMonths"] = new_features["HoursPerWeek"] / 4.33
     return new_features
+
+def create_features(df: pd.DataFrame, target_col: str = "Churn", 
+                    categorical_cols: list = ["Gender", "SeniorCitizen", "Partner", "Dependents"], 
+                    numeric_cols: list = ["TotalCharges", "Age", "Seniority", "Education", "HoursPerWeek"], 
+                    ordinal_cols: list = ["MonthlyCharges"], 
+                    datetime_cols: list = ["LastCommunication", "LastContact", "LastAccountUpdate", "LastActivity"]) -> pd.DataFrame:
+    """ 
+    Create new features from existing features.
+    
+    This function performs the following tasks:
+    - Create new features from existing features
+    - Return the new features
+    """
