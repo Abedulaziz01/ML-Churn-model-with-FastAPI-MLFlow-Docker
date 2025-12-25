@@ -180,4 +180,19 @@ def _create_binary_mappings():
     - Create binary mappings for categorical features
     - Return the binary mappings
     """
-   
+    return {"Gender": {
+        "Female": 0,
+        "Male": 1
+    },
+    "SeniorCitizen": {
+        "Yes": 1,
+        "No": 0
+    },
+    "Partner": {
+        "Yes": 1,
+        "No": 0
+    },
+    "Dependents": {
+        "Yes": 1,
+        "No": 0
+    }}
