@@ -172,3 +172,12 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
     # calculate hours per week in months    
     new_features["HoursPerWeekInMonths"] = new_features["HoursPerWeek"] / 4.33
     return new_features
+def _create_binary_mappings():
+    """     
+    Create binary mappings for categorical features.
+    
+    This function performs the following tasks:
+    - Create binary mappings for categorical features
+    - Return the binary mappings
+    """
+   
