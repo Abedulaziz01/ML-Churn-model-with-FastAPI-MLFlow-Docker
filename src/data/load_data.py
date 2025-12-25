@@ -173,26 +173,61 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
     new_features["HoursPerWeekInMonths"] = new_features["HoursPerWeek"] / 4.33
     return new_features
 def _create_binary_mappings():
-    """     
-    Create binary mappings for categorical features.
-    
-    This function performs the following tasks:
-    - Create binary mappings for categorical features
-    - Return the binary mappings
-    """
-    return {"Gender": {
-        "Female": 0,
-        "Male": 1
-    },
-    "SeniorCitizen": {
-        "Yes": 1,
-        "No": 0
-    },
-    "Partner": {
-        "Yes": 1,
-        "No": 0
-    },
-    "Dependents": {
-        "Yes": 1,
-        "No": 0
-    }}
+    """                         
+    Create binary mappings for categorical features.            
+
+
+    This function returns a dictionary mapping categorical feature values to binary values.
+    """                         
+    # create binary mappings for categorical features
+    binary_mappings = {}
+    for col in categorical_cols:
+        binary_mappings[col] = {}
+        for val in df[col].unique():
+            binary_mappings[col][val] = 1 if val == "Yes" else 0
+    return binary_mappings
+def _create_ordinal_mappings():
+    """                         
+    Create ordinal mappings for numeric features.            
+
+
+    This function returns a dictionary mapping numeric feature values to ordinal values.
+    """                         
+    # create ordinal mappings for numeric features
+    ordinal_mappings = {}
+    for col in numeric_cols:
+        ordinal_mappings[col] = {}
+        for val in df[col].unique():
+            ordinal_mappings[col][val] = val
+    return ordinal_mappings
+def _create_datetime_mappings():
+    """                         
+    Create ordinal mappings for datetime features.            
+
+
+    This function returns a dictionary mapping datetime feature values to ordinal values.
+    """                         
+    # create ordinal mappings for datetime features
+    datetime_mappings = {}
+    for col in datetime_cols:
+        datetime_mappings[col] = {}
+        for val in df[col].unique():
+            datetime_mappings[col][val] = val           
+    return datetime_mappings    
+def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, datetime_cols):
+    """                         
+    Create a ColumnTransformer for new features.            
+
+
+    This function returns a ColumnTransformer for new features.
+    """                         
+    # create a ColumnTransformer for new features
+    feature_transformer = ColumnTransformer(
+        transformers=[
+            ("categorical", OneHotEncoder(handle_unknown="ignore"), categorical_cols),
+            ("numeric", OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1), numeric_cols),
+            ("ordinal", OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1), ordinal_cols),
+            ("datetime", OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1), datetime_cols)
+        ]
+    )
+    return feature_transformer
