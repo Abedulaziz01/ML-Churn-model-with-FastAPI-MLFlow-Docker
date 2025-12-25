@@ -158,3 +158,4 @@ def create_features(df: pd.DataFrame, target_col: str = "Churn",
 
 
     # calculate seniority in days
+    new_features["SeniorityInDays"] = new_features["Seniority"] / 365
