@@ -22,3 +22,13 @@ def _create_ordinal_mappings():
         frozenset({"Low", "Medium", "High"}): {"Low": 0, "Medium": 1, "High": 2},
         frozenset({"Bronze", "Silver", "Gold", "Platinum"}): {"Bronze": 0, "Silver": 1, "Gold": 2, "Platinum": 3},
     }
+def _create_datetime_mappings():
+    """
+    Define deterministic datetime mappings for consistency between training and serving.
+    """
+    return {
+        "2020-01-01": 0,
+        "2020-06-01": 1,
+        "2021-01-01": 2,
+        "2021-06-01": 3,
+    }
