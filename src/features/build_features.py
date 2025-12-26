@@ -44,3 +44,25 @@ def _create_categorical_mappings():
         frozenset({"Low", "Medium", "High"}): {"Low": 0, "Medium": 1, "High": 2},
         frozenset({"2020-01-01", "2020-06-01", "2021-01-01", "2021-06-01"}): {"2020-01-01": 0, "2020-06-01": 1, "2021-01-01": 2, "2021-06-01": 3},
     }
+def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, datetime_cols):
+    """ 
+    Create a feature transformer that will be used to encode categorical and numeric features.
+    """
+    # Create a list of transformers to be used in the feature transformer
+    transformers = []
+
+    # Encode categorical features
+    if categorical_cols:
+        transformers.append(("categorical", OneHotEncoder(handle_unknown="ignore")))
+
+    # Encode numeric features
+    if numeric_cols:
+        transformers.append(("numeric", OrdinalEncoder(handle_unknown="ignore")))
+
+    # Encode ordinal features
+    if ordinal_cols:
+        transformers.append(("ordinal", OrdinalEncoder(handle_unknown="ignore")))
+
+    # Encode datetime features
+    if datetime_cols:
+        transformers.append(("datetime", OrdinalEncoder(handle_unknown="ignore")))
