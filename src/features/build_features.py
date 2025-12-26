@@ -71,3 +71,14 @@ def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, da
     feature_transformer = ColumnTransformer(transformers=transformers, remainder="passthrough")
 
     return feature_transformer
+    # create a ColumnTransformer for new features
+    feature_transformer = ColumnTransformer(        
+        transformers=[
+            ("categorical", OneHotEncoder(handle_unknown="ignore"), categorical_cols),
+            ("numeric", OrdinalEncoder(handle_unknown="ignore"), numeric_cols),
+            ("ordinal", OrdinalEncoder(handle_unknown="ignore"), ordinal_cols),
+            ("datetime", OrdinalEncoder(handle_unknown="ignore"), datetime_cols),
+        ],
+        remainder="passthrough",
+    )
+    return feature_transformer
