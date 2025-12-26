@@ -104,3 +104,5 @@ def build_features_test(df, categorical_cols, numeric_cols, ordinal_cols, dateti
     """
     # Create a feature transformer
     feature_transformer = _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, datetime_cols)
+    # Transform the features
+    transformed_df = feature_transformer.transform(df)
