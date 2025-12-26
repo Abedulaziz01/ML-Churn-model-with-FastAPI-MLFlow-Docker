@@ -66,3 +66,8 @@ def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, da
     # Encode datetime features
     if datetime_cols:
         transformers.append(("datetime", OrdinalEncoder(handle_unknown="ignore")))
+
+    # Create the ColumnTransformer
+    feature_transformer = ColumnTransformer(transformers=transformers, remainder="passthrough")
+
+    return feature_transformer
