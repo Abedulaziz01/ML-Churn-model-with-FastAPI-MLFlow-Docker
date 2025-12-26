@@ -32,3 +32,15 @@ def _create_datetime_mappings():
         "2021-01-01": 2,
         "2021-06-01": 3,
     }
+
+def _create_categorical_mappings():
+    """
+    Define deterministic categorical mappings for consistency between training and serving.
+    """
+    return {
+        frozenset({"Yes", "No"}): {"No": 0, "Yes": 1},
+        frozenset({"Male", "Female"}): {"Female": 0, "Male": 1},
+        frozenset({"Bronze", "Silver", "Gold", "Platinum"}): {"Bronze": 0, "Silver": 1, "Gold": 2, "Platinum": 3},
+        frozenset({"Low", "Medium", "High"}): {"Low": 0, "Medium": 1, "High": 2},
+        frozenset({"2020-01-01", "2020-06-01", "2021-01-01", "2021-06-01"}): {"2020-01-01": 0, "2020-06-01": 1, "2021-01-01": 2, "2021-06-01": 3},
+    }
