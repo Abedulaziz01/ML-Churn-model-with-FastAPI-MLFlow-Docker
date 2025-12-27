@@ -250,3 +250,18 @@ def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, da
     feature_transformer = ColumnTransformer(transformers=transformers, remainder="passthrough")
 
     return feature_transformer
+def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, datetime_cols):
+    """ 
+    Create a feature transformer that will be used to encode categorical and numeric features.
+    """
+    # Create a list of transformers to be used in the feature transformer
+    transformers = []
+
+    # Encode categorical features
+    if categorical_cols:
+        transformers.append(("categorical", OneHotEncoder(handle_unknown="ignore")))
+
+    # Encode numeric features
+    if numeric_cols:
+        transformers.append(("numeric", OrdinalEncoder(handle_unknown="ignore")))
+        
