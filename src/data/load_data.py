@@ -231,3 +231,5 @@ def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, da
         ]
     )
     return feature_transformer
+    transformers = []
+    
