@@ -264,4 +264,12 @@ def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, da
     # Encode numeric features
     if numeric_cols:
         transformers.append(("numeric", OrdinalEncoder(handle_unknown="ignore")))
-        
+
+
+    # Encode ordinal features
+    if ordinal_cols:
+        transformers.append(("ordinal", OrdinalEncoder(handle_unknown="ignore")))
+
+    # Encode datetime features
+    if datetime_cols:
+        transformers.append(("datetime", OrdinalEncoder(handle_unknown="ignore")))
