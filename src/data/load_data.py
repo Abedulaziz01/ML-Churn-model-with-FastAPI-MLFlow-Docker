@@ -232,4 +232,8 @@ def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, da
     )
     return feature_transformer
     transformers = []
-    
+
+    # Encode categorical features
+    if categorical_cols:
+        transformers.append(("categorical", OneHotEncoder(handle_unknown="ignore")))
+        
