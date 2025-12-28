@@ -342,3 +342,8 @@ def build_features(df, categorical_cols, numeric_cols, ordinal_cols, datetime_co
     """
     # Create a feature transformer
     feature_transformer = _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, datetime_cols)
+
+    # Fit the feature transformer
+    feature_transformer.fit(df)
+
+   
