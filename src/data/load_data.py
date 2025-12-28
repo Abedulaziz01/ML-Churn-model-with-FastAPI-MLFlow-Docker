@@ -334,3 +334,9 @@ def build_features(df, categorical_cols, numeric_cols, ordinal_cols, datetime_co
 
     return transformed_df
 
+def build_features(df, categorical_cols, numeric_cols, ordinal_cols, datetime_cols):
+    """
+    Build features for a given dataframe.
+    """
+    # Create a feature transformer
+    feature_transformer = _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, datetime_cols)
