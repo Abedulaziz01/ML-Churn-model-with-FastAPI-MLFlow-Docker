@@ -289,3 +289,7 @@ def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, da
         remainder="passthrough",
     )
     return feature_transformer
+
+    return feature_transformer
+
+    
