@@ -291,5 +291,19 @@ def _create_feature_transformer(categorical_cols, numeric_cols, ordinal_cols, da
     return feature_transformer
 
     return feature_transformer
+    return feature_transformer
+def build_features(df, categorical_cols, numeric_cols, ordinal_cols, datetime_cols):
+    """ 
+    Build features from categorical and numeric features.
+    """
+    # Create a list of transformers to be used in the feature transformer
+    transformers = []
 
-    
+    # Encode categorical features
+    if categorical_cols:
+        transformers.append(("categorical", OneHotEncoder(handle_unknown="ignore")))
+
+    # z
+    if numeric_cols:
+        transformers.append(("numeric", OrdinalEncoder(handle_unknown="ignore")))
+
