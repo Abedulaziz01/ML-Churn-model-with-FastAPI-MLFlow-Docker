@@ -306,4 +306,16 @@ def build_features(df, categorical_cols, numeric_cols, ordinal_cols, datetime_co
     # z
     if numeric_cols:
         transformers.append(("numeric", OrdinalEncoder(handle_unknown="ignore")))
+        # Encode ordinal features
+    if ordinal_cols:
+        transformers.append(("ordinal", OrdinalEncoder(handle_unknown="ignore")))
+
+    # Encode datetime features
+    if datetime_cols:
+        transformers.append(("datetime", OrdinalEncoder(handle_unknown="ignore")))
+
+    # Create the ColumnTransformer
+    feature_transformer = ColumnTransformer(transformers=transformers, remainder="passthrough")
+
+    return feature_transformer
 
