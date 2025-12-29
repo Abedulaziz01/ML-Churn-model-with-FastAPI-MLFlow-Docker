@@ -51,3 +51,17 @@ target_col = 'target'  # Replace 'target' with the actual target column name in 
 
 # Load the data from the CSV file
 X_train, X_test, y_train, y_test = load_data('data/train.csv', test_size=0.2, random_state=42)
+print("Training data shape:", X_train.shape)
+print("Testing data shape:", X_test.shape)
+
+# Define the target column
+target_col = 'target'  # Replace 'target' with the actual target column name in your dataset
+
+# Define the features columns
+features_cols = ['feature1', 'feature2', 'feature3', 'feature4', 'feature5']
+
+# Define the target column
+target_col = 'target'  # Replace 'target' with the actual target column name in your dataset
+
+# Define the features columns
+features_cols = ['feature1', 'feature2', 'feature3', 'feature4', 'feature5']
