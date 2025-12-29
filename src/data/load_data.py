@@ -65,3 +65,30 @@ target_col = 'target'  # Replace 'target' with the actual target column name in 
 
 # Define the features columns
 features_cols = ['feature1', 'feature2', 'feature3', 'feature4', 'feature5']
+categorical_cols = ['feature1', 'feature2']  # Replace with actual categorical feature names
+numerical_cols = ['feature3', 'feature4', 'feature5']  # Replace with actual numerical feature names
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', 'passthrough', numerical_cols),
+        ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_cols)
+    ])
+
+preprocessor.fit(X_train)
+X_train = preprocessor.transform(X_train)
+X_test = preprocessor.transform(X_test)
+
+print("Training data shape:", X_train.shape)
+print("Testing data shape:", X_test.shape)  
+# Define the features columns
+features_cols = ['feature1', 'feature2', 'feature3', 'feature4', 'feature5']
+categorical_cols = ['feature1', 'feature2']  # Replace with actual categorical feature names
+numerical_cols = ['feature3', 'feature4', 'feature5']  # Replace with actual numerical feature names
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', 'passthrough', numerical_cols),
+        ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_cols)
+    ])
+
+preprocessor.fit(X_train)
+X_train = preprocessor.transform(X_train)
+X_test = preprocessor.transform(X_test)
