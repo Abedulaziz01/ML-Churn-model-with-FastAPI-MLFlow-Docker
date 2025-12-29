@@ -27,3 +27,15 @@ def load_data(file_path: str, test_size: float = 0.2, random_state: int = 42):
                                                        random_state=random_state)
     
     return X_train, X_test, y_train, y_test
+def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
+    """ 
+    Preprocess the data by encoding categorical variables and handling missing values.
+    
+    This function performs the following tasks:
+    - Encodes categorical variables using OrdinalEncoder
+    - Handles missing values using the fillna() method
+    - Returns the preprocessed DataFrame
+    """
+    # Encode categorical variables using OrdinalEncoder
+    encoder = OrdinalEncoder()
+    df = encoder.fit_transform(df)
