@@ -92,3 +92,7 @@ preprocessor = ColumnTransformer(
 preprocessor.fit(X_train)
 X_train = preprocessor.transform(X_train)
 X_test = preprocessor.transform(X_test)
+
+print("Training data shape:", X_train.shape)
+print("Testing data shape:", X_test.shape)
+    
