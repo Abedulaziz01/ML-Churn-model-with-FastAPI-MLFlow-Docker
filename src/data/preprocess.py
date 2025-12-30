@@ -44,6 +44,4 @@ def preprocess_data(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame
     df[num_cols] = df[num_cols].fillna(0)
 
     return df
-    return df
-    return df   
     
