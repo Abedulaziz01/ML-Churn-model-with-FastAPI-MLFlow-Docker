@@ -128,3 +128,4 @@ preprocessor = ColumnTransformer(
     ])
 
 preprocessor.fit(X_train)
+X_train = preprocessor.transform(X_train)
