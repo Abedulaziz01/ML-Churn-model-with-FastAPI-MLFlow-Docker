@@ -92,3 +92,16 @@ def validate_telco_data(df) -> Tuple[bool, List[str]]:
     # No missing values in critical numeric features  
     ge_df.expect_column_values_to_not_be_null("tenure")
     ge_df.expect_column_values_to_not_be_null("MonthlyCharges")
+
+
+    # === DATA CONSISTENCY CHECKS ===
+    print("   🔗 Validating data consistency...")
+    
+    # Total charges should generally be >= Monthly charges (except for very new customers)
+    # This is a business logic check to catch data entry errors
+    ge_df.expect_column_pair_values_A_to_be_greater_than_B(
+        column_A="TotalCharges",
+        column_B="MonthlyCharges",
+        or_equal=True,
+        mostly=0.95  # Allow 5% exceptions for edge cases
+    )
