@@ -105,3 +105,8 @@ def validate_telco_data(df) -> Tuple[bool, List[str]]:
         or_equal=True,
         mostly=0.95  # Allow 5% exceptions for edge cases
     )
+
+     # === RUN VALIDATION SUITE ===
+    print("   ⚙️  Running complete validation suite...")
+    results = ge_df.validate()
+    
