@@ -60,3 +60,15 @@ def validate_telco_data(df) -> Tuple[bool, List[str]]:
         "Contract", 
         ["Month-to-month", "One year", "Two year"]
     )
+
+    # Internet service types (business constraint)
+    ge_df.expect_column_values_to_be_in_set(
+        "InternetService",
+        ["DSL", "Fiber optic", "No"]
+    )
+    
+    # === NUMERIC RANGE VALIDATION ===
+    print("   📊 Validating numeric ranges and business constraints...")
+    
+    # Tenure must be non-negative (business logic - can't have negative tenure)
+    ge_df.expect_column_values_to_be_between("tenure", min_value=0)
