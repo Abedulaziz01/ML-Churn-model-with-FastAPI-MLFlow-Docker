@@ -34,3 +34,16 @@ def validate_telco_data(df) -> Tuple[bool, List[str]]:
     ge_df.expect_column_to_exist("InternetService")
     ge_df.expect_column_to_exist("Contract")
     
+
+
+    
+    # Financial features (key churn predictors)
+    ge_df.expect_column_to_exist("tenure")
+    ge_df.expect_column_to_exist("MonthlyCharges")
+    ge_df.expect_column_to_exist("TotalCharges")
+    
+    # === BUSINESS LOGIC VALIDATION ===
+    print("   💼 Validating business logic constraints...")
+    
+    # Gender must be one of expected values (data integrity)
+    ge_df.expect_column_values_to_be_in_set("gender", ["Male", "Female"])
