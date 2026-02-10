@@ -20,3 +20,17 @@ def validate_telco_data(df) -> Tuple[bool, List[str]]:
     # Customer identifier must exist (required for business operations)  
     ge_df.expect_column_to_exist("customerID")
     ge_df.expect_column_values_to_not_be_null("customerID")
+
+
+
+    
+    # Core demographic features
+    ge_df.expect_column_to_exist("gender") 
+    ge_df.expect_column_to_exist("Partner")
+    ge_df.expect_column_to_exist("Dependents")
+    
+    # Service features (critical for churn analysis)
+    ge_df.expect_column_to_exist("PhoneService")
+    ge_df.expect_column_to_exist("InternetService")
+    ge_df.expect_column_to_exist("Contract")
+    
