@@ -77,3 +77,18 @@ def validate_telco_data(df) -> Tuple[bool, List[str]]:
     # Monthly charges must be positive (business logic - no free service)
     ge_df.expect_column_values_to_be_between("MonthlyCharges", min_value=0)
     
+    # Total charges should be non-negative (business logic)
+    ge_df.expect_column_values_to_be_between("TotalCharges", min_value=0)
+    
+    # === STATISTICAL VALIDATION ===
+    print("   📈 Validating statistical properties...")
+    
+    # Tenure should be reasonable (max ~10 years = 120 months for telecom)
+    ge_df.expect_column_values_to_be_between("tenure", min_value=0, max_value=120)
+    
+    # Monthly charges should be within reasonable business range
+    ge_df.expect_column_values_to_be_between("MonthlyCharges", min_value=0, max_value=200)
+    
+    # No missing values in critical numeric features  
+    ge_df.expect_column_values_to_not_be_null("tenure")
+    ge_df.expect_column_values_to_not_be_null("MonthlyCharges")
