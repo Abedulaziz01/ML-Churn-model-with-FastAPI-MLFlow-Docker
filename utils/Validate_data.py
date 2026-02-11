@@ -116,3 +116,16 @@ def validate_telco_data(df) -> Tuple[bool, List[str]]:
         if not r["success"]:
             expectation_type = r["expectation_config"]["expectation_type"]
             failed_expectations.append(expectation_type)
+
+            # Print validation summary
+    total_checks = len(results["results"])
+    passed_checks = sum(1 for r in results["results"] if r["success"])
+    failed_checks = total_checks - passed_checks
+    
+    if results["success"]:
+        print(f"✅ Data validation PASSED: {passed_checks}/{total_checks} checks successful")
+    else:
+        print(f"❌ Data validation FAILED: {failed_checks}/{total_checks} checks failed")
+        print(f"   Failed expectations: {failed_expectations}")
+    
+    return results["success"], failed_expectations
