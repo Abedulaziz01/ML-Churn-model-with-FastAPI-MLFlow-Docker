@@ -109,4 +109,10 @@ def validate_telco_data(df) -> Tuple[bool, List[str]]:
      # === RUN VALIDATION SUITE ===
     print("   ⚙️  Running complete validation suite...")
     results = ge_df.validate()
-    
+    # === PROCESS RESULTS ===
+    # Extract failed expectations for detailed error reporting
+    failed_expectations = []
+    for r in results["results"]:
+        if not r["success"]:
+            expectation_type = r["expectation_config"]["expectation_type"]
+            failed_expectations.append(expectation_type)
